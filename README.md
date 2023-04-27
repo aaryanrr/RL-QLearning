@@ -8,15 +8,17 @@ The idea is that an agent, having learned from past experience, understands whic
 
 # Parameters in reinforcement learning
 
-Agent - Agent (A) takes actions that affect the environment.
+Agent - Agent (A) takes actions that affect the environment. Citing an example, the machine learning to play chess is the agent.
 
 Action - It is the set of all possible operations/moves the agent can make. The agent makes a decision on which action to take from a set of discrete actions (a).
 
-Environment - The environment takes the agent's present state and action as information and returns the reward to the agent with a new state.
+Environment - All actions that the reinforcement learning agent makes directly affect the environment. Here, the board of chess is the environment. The environment takes the agent's present state and action as information and returns the reward to the agent with a new state.
 
-State - A state (S) is a particular situation in which the agent finds itself.                   
+For example, the move made by the bot will either have a negative/positive effect on the whole game and the arrangement of the board. This will decide the next action and state of the board.
 
-Reward (R) - The environment gives feedback by which we determine the validity of the agent’s actions in each state. It is crucial in the scenario of Reinforcement Learning where we want the machine to learn all by itself and the only critic that would help it in learning is the feedback/reward it receives.
+State - A state (S) is a particular situation in which the agent finds itself.                    Reward (R) - The environment gives feedback by which we determine the validity of the agent’s actions in each state. It is crucial in the scenario of Reinforcement Learning where we want the machine to learn all by itself and the only critic that would help it in learning is the feedback/reward it receives.
+
+For example, in a chess game scenario it happens when the bot takes the place of an opponent's piece and later captures it.
 
 Discount factor - Over time, the discount factor modifies the importance of incentives. Given the uncertainty of the future it’s better to add variance to the value estimates. Discount factor helps in reducing the degree to which future rewards affect our value function estimates.
 
@@ -25,3 +27,28 @@ Policy (π) - It decides what action to take in a certain state to maximize the 
 Value (V)—It measures the optimality of a specific state. It is the expected discounted rewards that the agent collects following the specific policy.
 
 Q-value or action-value - Q Value is a measure of the overall expected reward if the agent (A) is in state (s) and takes action (a), and then plays until the end of the episode according to some policy (π).
+
+# Reinforcement and Reward 
+Real-time collision avoidance approach using machine learning is presented for safe human-robot coexistence. More specifically, the collision avoidance problem is tackled with Deep Reinforcement Learning (DRL) techniques, applied to robot manipulators with a workspace invaded by unpredictable obstacles. Since the robotic systems are defined in the continuous space, a Normalized Advantage Function (NAF) model-free algorithm has been used.
+
+NORMALISED ADVANTAGE FUNCTION:
+Normalized Advantage Function (NAF) is a method that allows one to enable Q-learning in continuous action spaces with deep neural networks. The idea behind this method is to design the Q-function in a way that its maximum argmax aQ(st,at) can be easily computed during each update.
+
+REWARD FUNCTION:
+The reward function is a scalar function defined by the weighted sum of three terms: the distance between the endeffector and the target point, the magnitude of the actions, and the distance of the obstacle from the robot
+
+HYPERPARAMETER TUNING:
+The hyperparameters are all the elements that have to be set up in order to adjust the learning environment. The exploration of the policy during the training process is defined by the following list of values:
+
+type of noise D: the type of stochastic process added at each time step to the action, in order to keep exploring the environment; it can be either Brownian or Ornstein-Uhlenbeck noise;
+
+noise scale: scaling factor for noise exploration;
+
+noise decay factor: how quickly does the noise decay during the training episode.
+
+# Simulation results and graphs
+
+![image](https://user-images.githubusercontent.com/113916366/234783899-eb02bb31-5acc-4a60-a818-a6336eca1575.png)
+
+
+
