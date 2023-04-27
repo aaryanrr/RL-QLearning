@@ -1,34 +1,13 @@
-# File: env.py
-# Description: Building the environment-3 for the Mobile Robot to explore
-# Agent - Mobile Robot
-# Obstacles - 'road closed', 'trees', 'traffic lights', 'buildings'
-# Environment: PyCharm and Anaconda environment
-#
-# MIT License
-# Copyright (c) 2018 Valentyn N Sichkar
-# github.com/sichkar-valentyn
-#
-# Reference to:
-# Valentyn N Sichkar. Reinforcement Learning Algorithms for global path planning // GitHub platform. DOI: 10.5281/zenodo.1317899
-
-
-
-# Importing libraries
 import numpy as np  # To deal with data in form of matrices
 import tkinter as tk  # To build GUI
 import time  # Time is needed to slow down the agent and to see how he runs
 from PIL import Image, ImageTk  # For adding images into the canvas widget
 
-# Setting the sizes for the environment
 pixels = 20   # pixels
 env_height = 30  # grid height
 env_width = 30  # grid width
 
-# Global variable for dictionary with coordinates for the final route
 a = {}
-
-
-# Creating class for the environment
 class Environment(tk.Tk, object):
     def __init__(self):
         super(Environment, self).__init__()
@@ -38,35 +17,26 @@ class Environment(tk.Tk, object):
         self.geometry('{0}x{1}'.format(env_height * pixels, env_height * pixels))
         self.build_environment()
 
-        # Dictionaries to draw the final route
         self.d = {}
         self.f = {}
 
-        # Key for the dictionaries
         self.i = 0
 
-        # Writing the final dictionary first time
         self.c = True
 
-        # Showing the steps for longest found route
         self.longest = 0
 
-        # Showing the steps for the shortest route
         self.shortest = 0
 
-    # Function to build the environment
     def build_environment(self):
         self.canvas_widget = tk.Canvas(self,  bg='white',
                                        height=env_height * pixels,
                                        width=env_width * pixels)
 
-        # Uploading an image for background
         img_background = Image.open("images/bg.png")
         self.background = ImageTk.PhotoImage(img_background)
-        # Creating background on the widget
         self.bg = self.canvas_widget.create_image(0, 0, anchor='nw', image=self.background)
 
-        # Creating grid lines
         for column in range(0, env_width * pixels, pixels):
             x0, y0, x1, y1 = column, 0, column, env_height * pixels
             self.canvas_widget.create_line(x0, y0, x1, y1, fill='grey')
@@ -74,102 +44,67 @@ class Environment(tk.Tk, object):
             x0, y0, x1, y1 = 0, row, env_height * pixels, row
             self.canvas_widget.create_line(x0, y0, x1, y1, fill='grey')
 
-        # Creating objects of  Obstacles
-        # An array to help with building rectangles
         self.o = np.array([pixels / 2, pixels / 2])
 
-        # Obstacle 1
-        # Defining the center of obstacle 1
         obstacle1_center = self.o + np.array([pixels, pixels * 2])
-        # Building the obstacle 1
         self.obstacle1 = self.canvas_widget.create_rectangle(
             obstacle1_center[0] - 10, obstacle1_center[1] - 10,  # Top left corner
             obstacle1_center[0] + 10, obstacle1_center[1] + 10,  # Bottom right corner
             outline='grey', fill='#00BFFF')
-        # Saving the coordinates of obstacle 1 according to the size of agent
-        # In order to fit the coordinates of the agent
         self.coords_obstacle1 = [self.canvas_widget.coords(self.obstacle1)[0] + 3,
          self.canvas_widget.coords(self.obstacle1)[1] + 3,
          self.canvas_widget.coords(self.obstacle1)[2] - 3,
          self.canvas_widget.coords(self.obstacle1)[3] - 3]
 
-        # Obstacle 2
-        # Defining the center of obstacle 2
         obstacle2_center = self.o + np.array([pixels * 2, pixels * 2])
-        # Building the obstacle 2
         self.obstacle2 = self.canvas_widget.create_rectangle(
             obstacle2_center[0] - 10, obstacle2_center[1] - 10,  # Top left corner
             obstacle2_center[0] + 10, obstacle2_center[1] + 10,  # Bottom right corner
             outline='grey', fill='#00BFFF')
-        # Saving the coordinates of obstacle 2 according to the size of agent
-        # In order to fit the coordinates of the agent
-        self.coords_obstacle2 = [self.canvas_widget.coords(self.obstacle2)[0] + 3,
          self.canvas_widget.coords(self.obstacle2)[1] + 3,
          self.canvas_widget.coords(self.obstacle2)[2] - 3,
          self.canvas_widget.coords(self.obstacle2)[3] - 3]
-
-        # Obstacle 3
-        # Defining the center of obstacle 3
         obstacle3_center = self.o + np.array([pixels * 3, pixels * 2])
-        # Building the obstacle 3
         self.obstacle3 = self.canvas_widget.create_rectangle(
             obstacle3_center[0] - 10, obstacle3_center[1] - 10,  # Top left corner
             obstacle3_center[0] + 10, obstacle3_center[1] + 10,  # Bottom right corner
             outline='grey', fill='#00BFFF')
-        # Saving the coordinates of obstacle 3 according to the size of agent
-        # In order to fit the coordinates of the agent
         self.coords_obstacle3 = [self.canvas_widget.coords(self.obstacle3)[0] + 3,
          self.canvas_widget.coords(self.obstacle3)[1] + 3,
          self.canvas_widget.coords(self.obstacle3)[2] - 3,
          self.canvas_widget.coords(self.obstacle3)[3] - 3]
 
-        # Obstacle 4
-        # Defining the center of obstacle 4
         obstacle4_center = self.o + np.array([pixels * 3, pixels * 3])
-        # Building the obstacle 4
         self.obstacle4 = self.canvas_widget.create_rectangle(
             obstacle4_center[0] - 10, obstacle4_center[1] - 10,  # Top left corner
             obstacle4_center[0] + 10, obstacle4_center[1] + 10,  # Bottom right corner
             outline='grey', fill='#00BFFF')
-        # Saving the coordinates of obstacle 4 according to the size of agent
-        # In order to fit the coordinates of the agent
         self.coords_obstacle4 = [self.canvas_widget.coords(self.obstacle4)[0] + 3,
          self.canvas_widget.coords(self.obstacle4)[1] + 3,
          self.canvas_widget.coords(self.obstacle4)[2] - 3,
          self.canvas_widget.coords(self.obstacle4)[3] - 3]
 
-        # Obstacle 5
-        # Defining the center of obstacle 5
         obstacle5_center = self.o + np.array([pixels * 23, pixels])
-        # Building the obstacle 5
         self.obstacle5 = self.canvas_widget.create_rectangle(
             obstacle5_center[0] - 10, obstacle5_center[1] - 10,  # Top left corner
             obstacle5_center[0] + 10, obstacle5_center[1] + 10,  # Bottom right corner
             outline='grey', fill='#00BFFF')
-        # Saving the coordinates of obstacle 2 according to the size of agent
-        # In order to fit the coordinates of the agent
         self.coords_obstacle5 = [self.canvas_widget.coords(self.obstacle5)[0] + 3,
          self.canvas_widget.coords(self.obstacle5)[1] + 3,
          self.canvas_widget.coords(self.obstacle5)[2] - 3,
          self.canvas_widget.coords(self.obstacle5)[3] - 3]
 
-        # Obstacle 6
-        # Defining the center of obstacle 6
         obstacle6_center = self.o + np.array([pixels * 6, pixels])
-        # Building the obstacle 6
         self.obstacle6 = self.canvas_widget.create_rectangle(
             obstacle6_center[0] - 10, obstacle6_center[1] - 10,  # Top left corner
             obstacle6_center[0] + 10, obstacle6_center[1] + 10,  # Bottom right corner
             outline='grey', fill='#00BFFF')
-        # Saving the coordinates of obstacle 6 according to the size of agent
-        # In order to fit the coordinates of the agent
         self.coords_obstacle6 = [self.canvas_widget.coords(self.obstacle6)[0] + 3,
          self.canvas_widget.coords(self.obstacle6)[1] + 3,
          self.canvas_widget.coords(self.obstacle6)[2] - 3,
          self.canvas_widget.coords(self.obstacle6)[3] - 3]
 
         # Obstacle 7
-        # Defining the center of obstacle 7
         obstacle7_center = self.o + np.array([pixels * 6, pixels * 2])
         # Building the obstacle 7
         self.obstacle7 = self.canvas_widget.create_rectangle(
