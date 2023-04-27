@@ -49,4 +49,8 @@ noise decay factor: how quickly does the noise decay during the training episode
 ![image](https://user-images.githubusercontent.com/113916366/234783899-eb02bb31-5acc-4a60-a818-a6336eca1575.png)
 
 
+https://user-images.githubusercontent.com/73213670/234786939-eede9773-96f4-4c86-8068-817d84ed4e68.mp4
+
+
+
 
