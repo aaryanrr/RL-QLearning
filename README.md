@@ -8,17 +8,15 @@ The idea is that an agent, having learned from past experience, understands whic
 
 # Parameters in reinforcement learning
 
-Agent - Agent (A) takes actions that affect the environment. Citing an example, the machine learning to play chess is the agent.
+Agent - Agent (A) takes actions that affect the environment.
 
 Action - It is the set of all possible operations/moves the agent can make. The agent makes a decision on which action to take from a set of discrete actions (a).
 
-Environment - All actions that the reinforcement learning agent makes directly affect the environment. Here, the board of chess is the environment. The environment takes the agent's present state and action as information and returns the reward to the agent with a new state.
+Environment - The environment takes the agent's present state and action as information and returns the reward to the agent with a new state.
 
-For example, the move made by the bot will either have a negative/positive effect on the whole game and the arrangement of the board. This will decide the next action and state of the board.
+State - A state (S) is a particular situation in which the agent finds itself.                    
 
-State - A state (S) is a particular situation in which the agent finds itself.                    Reward (R) - The environment gives feedback by which we determine the validity of the agent’s actions in each state. It is crucial in the scenario of Reinforcement Learning where we want the machine to learn all by itself and the only critic that would help it in learning is the feedback/reward it receives.
-
-For example, in a chess game scenario it happens when the bot takes the place of an opponent's piece and later captures it.
+Reward (R) - The environment gives feedback by which we determine the validity of the agent’s actions in each state. It is crucial in the scenario of Reinforcement Learning where we want the machine to learn all by itself and the only critic that would help it in learning is the feedback/reward it receives.
 
 Discount factor - Over time, the discount factor modifies the importance of incentives. Given the uncertainty of the future it’s better to add variance to the value estimates. Discount factor helps in reducing the degree to which future rewards affect our value function estimates.
 
