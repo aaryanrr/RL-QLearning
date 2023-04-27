@@ -1,4 +1,4 @@
 # Collision Avoidance And Path Detection System
 The system employs deep reinforcement learning to create an optimised and efficient navigation system which prevents collisions and detects the best possible path for navigation. A collision avoidance system is an advanced technology that helps prevent accidents by alerting drivers of potential collisions. The system uses sensors, cameras and radar to detect objects in the path of the vehicle, and warns the driver if there is a risk of collision. Reinforcement Learning is a type of machine learning algorithm that learns to solve a multi-level problem by trial and error. The machine is trained on real-life scenarios to make a sequence of decisions. It receives either rewards or penalties for the actions it performs. Its goal is to maximize the total reward.
 
-#Deep Reinforcement Learning
+# Deep Reinforcement Learning
